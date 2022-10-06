@@ -1,5 +1,12 @@
-function App() {
-	return <h1 className="font-semibold text-center">Hello</h1>;
-}
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MainPage } from './pages/MainPage';
 
-export default App;
+export const App = () => {
+	return (
+		<Router>
+			<Routes>
+				<Route path="/" element={<MainPage />}></Route>
+			</Routes>
+		</Router>
+	);
+};
