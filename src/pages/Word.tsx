@@ -1,15 +1,18 @@
 import { useParams } from 'react-router-dom';
+import { Loader } from '../components';
 import { wordAPI } from '../redux/wordService';
+import { NotFoundPage } from './NotFound';
 
 export const WordPage = () => {
 	const { search } = useParams();
+	const { data, isLoading, error } = wordAPI.useFetchWordQuery(search as string);
 
-	const { data, isLoading } = wordAPI.useFetchWordQuery(search as string);
 	const word = data && data[0];
 
 	return (
 		<>
-			{isLoading && <h1 className="text-[60px]">loading</h1>}
+			{isLoading && <Loader />}
+			{error && <NotFoundPage message="No definitions found" />}
 			<p>{word?.word}</p>
 		</>
 	);

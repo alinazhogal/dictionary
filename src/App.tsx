@@ -1,14 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { MainPage } from './pages/Main';
-import { WordPage } from './pages/Word';
+import { Container, Header, Footer } from './components';
+import { WordPage, NotFoundPage, MainPage } from './pages';
 
 export const App = () => {
 	return (
 		<Router>
-			<Routes>
-				<Route path="/" element={<MainPage />} />
-				<Route path="/:search" element={<WordPage />} />
-			</Routes>
+			<Header />
+			<Container>
+				<Routes>
+					<Route path="/" element={<MainPage />} />
+					<Route path="/:search" element={<WordPage />} />
+					<Route path="*" element={<NotFoundPage />} />
+				</Routes>
+			</Container>
+			<Footer />
 		</Router>
 	);
 };
