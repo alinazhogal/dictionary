@@ -45,7 +45,8 @@ module.exports = {
 		'@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
 		'@typescript-eslint/unbound-method': 'off',
 		'@typescript-eslint/no-unsafe-argument': 'off',
-		'react-hooks/exhaustive-deps': 'error',
+		'@typescript-eslint/no-unsafe-call': 'off',
+		'react-hooks/exhaustive-deps': 'off',
 		'@typescript-eslint/no-unsafe-return': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
 		'no-console': [
 			process.env.NODE_ENV === 'production' ? 'error' : 'warn',
