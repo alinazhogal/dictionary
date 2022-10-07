@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Loader } from '../components';
+import { Loader, WordDetails, Search } from '../components';
 import { wordAPI } from '../redux/wordService';
 import { NotFoundPage } from './NotFound';
 
@@ -7,13 +7,24 @@ export const WordPage = () => {
 	const { search } = useParams();
 	const { data, isLoading, error } = wordAPI.useFetchWordQuery(search as string);
 
-	const word = data && data[0];
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	if (error) {
+		return <NotFoundPage message="No definitions found" />;
+	}
+
+	if (!data) {
+		return null;
+	}
 
 	return (
 		<>
-			{isLoading && <Loader />}
-			{error && <NotFoundPage message="No definitions found" />}
-			<p>{word?.word}</p>
+			<Search />
+			{data.map((word, index) => (
+				<WordDetails details={word} key={index} />
+			))}
 		</>
 	);
 };
