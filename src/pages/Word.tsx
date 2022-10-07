@@ -5,7 +5,7 @@ import { NotFoundPage } from './NotFound';
 
 export const WordPage = () => {
 	const { search } = useParams();
-	const { data, isLoading, error } = wordAPI.useFetchWordQuery(search as string);
+	const { data, isLoading, error } = wordAPI.useFetchWordQuery(search?.trim() as string);
 
 	if (isLoading) {
 		return <Loader />;

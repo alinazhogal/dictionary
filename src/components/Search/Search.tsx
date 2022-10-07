@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Search = () => {
-	const [word, setWord] = useState<string>('');
+	const [word, setWord] = useState('');
 	const navigate = useNavigate();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ export const Search = () => {
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter') {
-			navigate(`/${word}`);
+			navigate(`/${word.trim()}`);
 		}
 	};
 
@@ -25,7 +25,7 @@ export const Search = () => {
 				onKeyDown={handleKeyDown}
 			/>
 			<Link
-				to={`/${word}`}
+				to={`/${word.trim()}`}
 				className="py-2.5 px-4 bg-blue-500 rounded-full text-white transition ease-in-out hover:bg-blue-700"
 			>
 				Search
