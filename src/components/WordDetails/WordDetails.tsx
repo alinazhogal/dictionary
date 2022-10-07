@@ -1,5 +1,4 @@
 import { Word } from '../../redux/types';
-import { Audio } from '../../icons';
 import styles from './WordDetails.module.css';
 
 type Props = {
@@ -7,13 +6,6 @@ type Props = {
 };
 
 export const WordDetails = ({ details }: Props) => {
-	const audio = document.querySelector('audio');
-
-	async function toggleAudio() {
-		if (!audio) return;
-		await audio.play();
-	}
-
 	return (
 		<section className="w-full flex flex-col space-y-5">
 			<div className="flex items-end space-x-4">
@@ -25,10 +17,12 @@ export const WordDetails = ({ details }: Props) => {
 					<p className={styles.heading}>Pronunciation</p>
 					{details.phonetics.map((item, index) => (
 						<div key={index} className={styles.blockRow}>
-							<button onClick={toggleAudio} className={item.audio ? '' : 'pointer-events-none'}>
-								<Audio className={item.audio ? 'fill-blue-600' : 'fill-gray-400'} />
-							</button>
-							<audio src={item.audio}>Your browser does not support the audio element.</audio>
+							<audio controls src={item.audio}>
+								<p>
+									Your browser does not support the audio element. You can download it
+									<a href={item.audio}> here</a>
+								</p>
+							</audio>
 							<p>{item.text}</p>
 						</div>
 					))}
@@ -87,7 +81,11 @@ export const WordDetails = ({ details }: Props) => {
 				<p className={styles.heading}>Source urls</p>
 				<div className={styles.list}>
 					{details.sourceUrls?.map((i) => (
-						<a className="block underline transition hover:text-blue-500" href={i} key={i}>
+						<a
+							className="block break-words underline transition hover:text-blue-500"
+							href={i}
+							key={i}
+						>
 							{i}
 						</a>
 					))}
